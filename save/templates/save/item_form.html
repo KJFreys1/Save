@@ -1,0 +1,14 @@
+{% extends 'save/base.html' %}
+
+{% block content %}
+    {% if '/new' in request.path %}
+        <h1>New Item for {{ list.title }}</h1>
+    {% elif '/update' in request.path %}
+        <h1>Edit Item for {{ list.title }}</h1>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

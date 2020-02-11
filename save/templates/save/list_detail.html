@@ -1,0 +1,21 @@
+{% extends 'save/base.html' %}
+
+{% block content %}
+{% comment %} <h2>{{ list.title }}</h2> {% endcomment %}
+<h2>{{ list.title }} <a href="{% url 'list_update' pk=list.pk %}">(edit)</a><a href="{% url 'list_delete' pk=list.pk %}">(delete)</a></h2>
+{% comment %} <a href="{% url 'item_create' pk=list.pk %}">(Add Item)</a> {% endcomment %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<ul>
+    {% for item in list.items.all %}
+        <li>
+            {{ item.item }}
+            <a href="{% url 'item_update' pk=item.pk %}">(Edit)</a>
+            {% comment %} <a href="{% url 'item_delete' pk=item.pk %}">(Delete)</a> {% endcomment %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
