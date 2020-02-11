@@ -14,6 +14,14 @@
         <nav>
             <a href="/">Lists</a>
             <a href="{% url 'list_create' %}">Add a list</a>
+            <div class="user-info">
+                {% if user.is_authenticated %} Welcome, {{ user.username }}
+                    <a href="{% url 'logout' %}">Log out</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Signup</a>
+                {% endif %}
+            </div>
         </nav>
     </header>
     <div class='block'>

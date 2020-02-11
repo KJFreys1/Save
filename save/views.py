@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import List, Items
 from .forms import ListForm, ItemsForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def list_list(request):
     lists = List.objects.all()
     return render(request, 'save/list_list.html', {'lists': lists})
 
+@login_required
 def list_detail(request, pk):
     # adding an underscore to avoid issues with a key word/function.
     _list = List.objects.get(pk=pk)
@@ -24,6 +27,7 @@ def list_detail(request, pk):
         form = ItemsForm()
     return render(request, 'save/list_detail.html', {'list': _list, 'form': form})
 
+@login_required
 def list_create(request):
     if request.method == 'POST':
         form = ListForm(request.POST)
@@ -34,6 +38,7 @@ def list_create(request):
         form = ListForm()
     return render(request, 'save/list_form.html', {'form': form})
 
+@login_required
 def list_update(request, pk):
     _list = List.objects.get(pk=pk)
     if request.method == 'POST':
@@ -45,18 +50,22 @@ def list_update(request, pk):
         form = ListForm(instance=_list)
     return render(request, 'save/list_form.html', {'form': form})
 
+@login_required
 def list_delete(request, pk):
     List.objects.get(pk=pk).delete()
     return redirect('list_list')
 
+@login_required
 def item_list(request):
     items = Items.objects.all()
     return render(request, 'save/items_list.html', {'items': items})
 
+@login_required
 def item_detail(request, pk):
     item = Items.objects.get(pk=pk)
     return render(request, 'save/item_detail.html', {'item': item})
 
+@login_required
 def item_update(request, pk):
     item = Items.objects.get(pk=pk)
     if request.method == 'POST':
@@ -69,6 +78,7 @@ def item_update(request, pk):
         form = ItemsForm(instance=item)
     return render(request, 'save/item_form.html', {'form': form})
 
+@login_required
 def item_delete(request, pk):
     item = Items.objects.get(pk=pk)
     _list = item._list_id
