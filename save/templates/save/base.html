@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
-    <h1>Save</h1>
-    <nav>
-        <a href="/">Lists</a>
-        <a href="{% url 'list_create' %}">Add a list</a>
-    </nav>
-    {% block content %}{% endblock %}
+    <header>
+        <h1>Save</h1>
+        <nav>
+            <a href="/">Lists</a>
+            <a href="{% url 'list_create' %}">Add a list</a>
+        </nav>
+    </header>
+    <div class='block'>
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

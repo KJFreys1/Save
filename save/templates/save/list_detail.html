@@ -14,7 +14,7 @@
         <li>
             {{ item.item }}
             <a href="{% url 'item_update' pk=item.pk %}">(Edit)</a>
-            {% comment %} <a href="{% url 'item_delete' pk=item.pk %}">(Delete)</a> {% endcomment %}
+            <a href="{% url 'item_delete' pk=item.pk %}">(Delete)</a>
         </li>
     {% endfor %}
 </ul>

@@ -16,7 +16,7 @@ def list_detail(request, pk):
             # item is created in the code but not saved in the database yet.
             item = form.save(commit=False)
             # this associates the item with a list.
-            item.lists_id = pk
+            item._list_id = pk
             # this save commits it to the database.
             item.save()
             return redirect('list_detail', pk=pk)
@@ -63,13 +63,14 @@ def item_update(request, pk):
         form = ItemsForm(request.POST, instance=item)
         if form.is_valid():
             item = form.save()
-            _list = item.lists_id
+            _list = item._list_id
             return redirect('list_detail', pk=_list)
     else:
         form = ItemsForm(instance=item)
     return render(request, 'save/item_form.html', {'form': form})
 
 def item_delete(request, pk):
+    item = Items.objects.get(pk=pk)
+    _list = item._list_id
     Items.objects.get(pk=pk).delete()
-    _list = Items.lists_id
     return redirect('list_detail', pk=_list)

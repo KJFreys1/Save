@@ -8,7 +8,7 @@ class List(models.Model):
         return self.title
 
 class Items(models.Model):
-    lists = models.ForeignKey(List, on_delete=models.CASCADE, related_name='items')
+    _list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='items')
     item = models.CharField(max_length = 200)
     completed_item = models.TextField(default=' ', blank=True)
 
