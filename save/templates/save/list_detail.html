@@ -11,17 +11,23 @@
 </form>
 <ul>
     {% for item in list.items.all %}
-        {% if item.priority %}
+        {% if item.complete %}
+            <li class="grey">
+                {{ item.item }}
+                <a href="{% url 'item_update' pk=item.pk %}">(Edit)</a>
+                <a href="{% url 'item_delete' pk=item.pk %}">(Delete)</a>
+            </li>
+        {% elif item.priority %}
             <li class="red">
                 {{ item.item }}
                 <a href="{% url 'item_update' pk=item.pk %}">(Edit)</a>
-                <a href="{% url 'item_delete' pk=item.pk %}">(Complete)</a>
+                <a href="{% url 'item_grey' pk=item.pk %}">(Complete)</a>
             </li>
         {% else %}
             <li class="green">
                 {{ item.item }}
                 <a href="{% url 'item_update' pk=item.pk %}">(Edit)</a>
-                <a href="{% url 'item_delete' pk=item.pk %}">(Complete)</a>
+                <a href="{% url 'item_grey' pk=item.pk %}">(Complete)</a>
             </li>
         {% endif %}
     {% endfor %}

@@ -68,6 +68,14 @@ def item_detail(request, pk):
     return render(request, 'save/item_detail.html', {'item': item})
 
 @login_required
+def item_grey(request, pk):
+    item = Items.objects.get(pk=pk)
+    item.complete = True
+    item.save()
+    _list = item._list_id
+    return redirect('list_detail', pk=_list)
+
+@login_required
 def item_update(request, pk):
     item = Items.objects.get(pk=pk)
     if request.method == 'POST':

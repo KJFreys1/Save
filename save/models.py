@@ -14,6 +14,7 @@ class Items(models.Model):
     item = models.CharField(max_length = 200)
     completed_item = models.TextField(default=' ', blank=True)
     priority = models.BooleanField(default=False)
+    complete = models.BooleanField(default=False)
 
     def __str__(self):
         return self.item
