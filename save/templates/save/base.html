@@ -10,16 +10,19 @@
 </head>
 <body>
     <header>
-        <h1>Save</h1>
+        <h1 class="title">Save</h1>
         <nav>
-            <a href="/">Lists</a>
-            <a href="{% url 'list_create' %}">Add a list</a>
+            <div>
+                <a class="buttonNav" href="/">Lists</a>
+                <a class="buttonNav" href="{% url 'list_create' %}">Add a list</a>
+            </div>
+            <br></br>
             <div class="user-info">
-                {% if user.is_authenticated %} Welcome, {{ user.username }}
-                    <a href="{% url 'logout' %}">Log out</a>
+                <span class="welcome_message">{% if user.is_authenticated %} Welcome, {{ user.username }}</span>
+                    <a class="delete welcome_message" href="{% url 'logout' %}">Log out</a>
                 {% else %}
-                    <a href="{% url 'login' %}">Login</a>
-                    <a href="{% url 'signup' %}">Signup</a>
+                    <a class="edit welcome_message" href="{% url 'login' %}">Login</a>
+                    <a class="edit welcome_message" href="{% url 'signup' %}">Signup</a>
                 {% endif %}
             </div>
         </nav>
