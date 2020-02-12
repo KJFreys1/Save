@@ -12,4 +12,4 @@ class ItemsForm(forms.ModelForm):
 
     class Meta:
         model = Items
-        fields = ('item',)
+        fields = ('item', 'priority')

@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from .models import List, Items
 from .forms import ListForm, ItemsForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required
 def list_list(request):
-    lists = List.objects.all()
+    lists = List.objects.filter(user=request.user)
     return render(request, 'save/list_list.html', {'lists': lists})
 
 @login_required
@@ -31,6 +32,7 @@ def list_detail(request, pk):
 def list_create(request):
     if request.method == 'POST':
         form = ListForm(request.POST)
+        form.instance.user = request.user
         if form.is_valid():
             _list = form.save()
             return redirect('list_detail', pk=_list.pk)

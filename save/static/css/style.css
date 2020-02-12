@@ -25,3 +25,11 @@ h1 {
 .block {
     margin: 20px;
 }
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
