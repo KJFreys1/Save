@@ -1,6 +1,7 @@
 {% extends 'save/base.html' %}
 
 {% block content %}
+<<<<<<< HEAD
 {% comment %} <h2>{{ list.title }}</h2> {% endcomment %}
 <h2>{{ list.title }} <a href="{% url 'list_update' pk=list.pk %}">(edit)</a><a href="{% url 'list_delete' pk=list.pk %}">(delete)</a></h2>
 {% comment %} <a href="{% url 'item_create' pk=list.pk %}">(Add Item)</a> {% endcomment %}
@@ -32,4 +33,31 @@
         {% endif %}
     {% endfor %}
 </ul>
+=======
+<div class="list_form2">
+    {% comment %} <h2>{{ list.title }}</h2> {% endcomment %}
+    <div>
+        <h2>{{ list.title }} <a class='edit' href="{% url 'list_update' pk=list.pk %}">(Edit)</a> <a class="delete" href="{% url 'list_delete' pk=list.pk %}">(Delete)</a></h2>
+    </div>
+    {% comment %} <a href="{% url 'item_create' pk=list.pk %}">(Add Item)</a> {% endcomment %}
+    <form class="list_input" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="list_form_save" type="submit">Save</button>
+    </form>
+    <ol>
+        {% for item in list.items.all %}
+            <h3>
+                <li>
+                    {{ item.item }}
+                    <div>
+                        <a class='edit' href="{% url 'item_update' pk=item.pk %}">(Edit)</a>
+                        <a class="delete" href="{% url 'item_delete' pk=item.pk %}">(Delete)</a>
+                    </div>
+                </li>
+            </h3>
+        {% endfor %}
+    </ol>
+</div>
+>>>>>>> css
 {% endblock %}

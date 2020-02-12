@@ -1,11 +1,15 @@
 {% extends 'save/base.html' %}
 
 {% block content %}
-<ul>
-    {% for list in lists %}
-        <li>
-            <a href="{% url 'list_detail' pk=list.pk %}">{{ list.title }}</a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="list_form">
+    <ol>
+        {% for list in lists %}
+            <h1>
+                <li>
+                    <a class="list_list" href="{% url 'list_detail' pk=list.pk %}">{{ list.title }}</a>
+                </li>
+            </h1>
+        {% endfor %}
+    </ol>
+</div>
 {% endblock %}
